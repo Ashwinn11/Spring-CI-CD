@@ -16,5 +16,13 @@ pipeline{
                 sh 'mvn clean package -DskipTests'
             }
         }
+        stage('Static Code Analysis') {
+
+            steps {
+                withSonarQubeEnv(installationName: 'sonarqube') {
+                    sh 'mvn sonar:sonar '
+                }
+            }
+        }
     }
 }
