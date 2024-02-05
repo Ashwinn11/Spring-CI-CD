@@ -26,10 +26,13 @@ pipeline{
 //        }
         stage('docker build'){
             steps{
-                sh 'docker build -t ashwiin11/spring-demo .'
-                def dockerImage = docker.image("ashwiin11/spring-demo")
-                withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
-                    dockerImage.push()
+                script {
+                    sh 'docker build -t ashwiin11/spring-demo .'
+                    def dockerImage = docker.image("ashwiin11/spring-demo")
+                    withDockerRegistry(credentialsId: 'docker', url: 'https://index.docker.io/v1/') {
+                        dockerImage.push()
+
+                    }
                 }
 
             }
